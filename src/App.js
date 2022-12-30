@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 
 function App() {
 const [name,setName]= useState('')
-let [users,setUsers] = useState([])
+const [users,setUsers] = useState([])
 
-
+const [error,setError]= useState()
 
 
   useEffect(()=>{
     fetch(name.length? `https://jsonplaceholder.typicode.com/users/?name=${name}`: 'https://jsonplaceholder.typicode.com/users/')
      .then(res=>res.json())
-    .then(data=>setUsers(data))
+    .then(data=>setUsers(data)).catch(er=> setError(er.message))
   },[name])
 
- console.log(users.length)
+//  console.log(error)
 
 
 
