@@ -1,25 +1,19 @@
 import { useEffect, useState } from "react";
-import UseFetch from "./UseFetch";
 
 function App() {
 const [name,setName]= useState('')
-
-
-
-// let [users] =UseFetch('https://jsonplaceholder.typicode.com/users') 
-
 let [users,setUsers] = useState([])
 
 
-// users= user
+
 
   useEffect(()=>{
-fetch(name.length? `https://jsonplaceholder.typicode.com/users/?name=${name}`: 'https://jsonplaceholder.typicode.com/users/')
-.then(res=>res.json())
-.then(data=>setUsers(data))
+    fetch(name.length? `https://jsonplaceholder.typicode.com/users/?name=${name}`: 'https://jsonplaceholder.typicode.com/users/')
+     .then(res=>res.json())
+    .then(data=>setUsers(data))
   },[name])
 
- 
+ console.log(users.length)
 
 
 
@@ -48,7 +42,7 @@ const search =(event)=>{
   
     <div className="grid max-w-sm mt-10 gap-5 mb-8 lg:grid-cols-3 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl sm:mx-auto">
     {
-      users?.map((user)=> <div user={user} key={user.id} className="px-10 py-20 text-center border rounded lg:px-5 lg:py-10 xl:py-20">
+    users.length?  users?.map((user)=> <div user={user} key={user.id} className="px-10 py-20 text-center border rounded lg:px-5 lg:py-10 xl:py-20">
          
           <a
             href="/"
@@ -74,7 +68,7 @@ const search =(event)=>{
            City: {user?.address?.city}
           </p>
           
-        </div>)
+        </div>): <h1 className="text-5xl font-semibold text-center mt-20">No user Found</h1>
     }
        
       
